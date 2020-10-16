@@ -1,0 +1,6 @@
+FROM openjdk:11 as builder
+WORKDIR C:/Program Files/Java/jdk-14/bin
+COPY ../ application
+RUN "C:\Program Files\Java\jdk-14\bin\java.exe" -Dmaven.multiModuleProjectDirectory=C:\Projects\Web\ownapp\tgbot "-Dmaven.home=C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3" "-Dclassworlds.conf=C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3\bin\m2.conf" "-Dmaven.ext.class.path=C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven-event-listener.jar" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\lib\idea_rt.jar=56212:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3\boot\plexus-classworlds.license" org.codehaus.classworlds.Launcher -Didea.version2020.1.1 -s C:\Users\shokhrukh\.m2\settings_proxy.xml -DskipTests=true package
+
+ENTRYPOINT ["java","-jar", "tgbot-1.jar"]
